@@ -34,7 +34,7 @@ def log(message):
 
 def checkWork(web3, threads, check_alive):
     sleep_time = 15
-    if len(web3.eth.getBlock('pending').transactions) > 0:
+    if int(web3.geth.txpool.status().get('pending'), 0) > 0:
         if not web3.eth.mining:
             log('Pending transactions! Mining ...')
             pool = web3.geth.txpool.status()
